@@ -11,6 +11,13 @@
 		2ECCBD2E29DF492200094BDC /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2ECCBD2D29DF492200094BDC /* ContentView.swift */; };
 		2ECCBD3029DF492400094BDC /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2ECCBD2F29DF492400094BDC /* Assets.xcassets */; };
 		2ECCBD3329DF492400094BDC /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2ECCBD3229DF492400094BDC /* Preview Assets.xcassets */; };
+		2ECCBD3E29DF4C3F00094BDC /* FileParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2ECCBD3D29DF4C3F00094BDC /* FileParser.swift */; };
+		2ECCBD4029DF4C7100094BDC /* Run.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2ECCBD3F29DF4C7100094BDC /* Run.swift */; };
+		2ECCBD4229E345A900094BDC /* RunLogViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2ECCBD4129E345A900094BDC /* RunLogViewModel.swift */; };
+		2ECCBD4429E3482700094BDC /* RunLogTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2ECCBD4329E3482700094BDC /* RunLogTableView.swift */; };
+		2ECCBD4629E3485200094BDC /* EditRunView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2ECCBD4529E3485100094BDC /* EditRunView.swift */; };
+		2ECCBD4829E34B3400094BDC /* RunLog.csv in Resources */ = {isa = PBXBuildFile; fileRef = 2ECCBD4729E34B3400094BDC /* RunLog.csv */; };
+		2ECCBD4A29E46FA500094BDC /* RunLog.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2ECCBD4929E46FA500094BDC /* RunLog.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -20,6 +27,13 @@
 		2ECCBD2F29DF492400094BDC /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		2ECCBD3229DF492400094BDC /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		2ECCBD3429DF492400094BDC /* RunLog.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = RunLog.entitlements; sourceTree = "<group>"; };
+		2ECCBD3D29DF4C3F00094BDC /* FileParser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileParser.swift; sourceTree = "<group>"; };
+		2ECCBD3F29DF4C7100094BDC /* Run.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Run.swift; sourceTree = "<group>"; };
+		2ECCBD4129E345A900094BDC /* RunLogViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RunLogViewModel.swift; sourceTree = "<group>"; };
+		2ECCBD4329E3482700094BDC /* RunLogTableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RunLogTableView.swift; sourceTree = "<group>"; };
+		2ECCBD4529E3485100094BDC /* EditRunView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditRunView.swift; sourceTree = "<group>"; };
+		2ECCBD4729E34B3400094BDC /* RunLog.csv */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = RunLog.csv; sourceTree = "<group>"; };
+		2ECCBD4929E46FA500094BDC /* RunLog.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RunLog.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -54,6 +68,9 @@
 			children = (
 				2ECCBD2B29DF492200094BDC /* RunLogApp.swift */,
 				2ECCBD2D29DF492200094BDC /* ContentView.swift */,
+				2ECCBD3A29DF4B7F00094BDC /* Views */,
+				2ECCBD3B29DF4C1B00094BDC /* View Models */,
+				2ECCBD3C29DF4C2800094BDC /* Data Models */,
 				2ECCBD2F29DF492400094BDC /* Assets.xcassets */,
 				2ECCBD3429DF492400094BDC /* RunLog.entitlements */,
 				2ECCBD3129DF492400094BDC /* Preview Content */,
@@ -64,9 +81,37 @@
 		2ECCBD3129DF492400094BDC /* Preview Content */ = {
 			isa = PBXGroup;
 			children = (
+				2ECCBD4729E34B3400094BDC /* RunLog.csv */,
 				2ECCBD3229DF492400094BDC /* Preview Assets.xcassets */,
 			);
 			path = "Preview Content";
+			sourceTree = "<group>";
+		};
+		2ECCBD3A29DF4B7F00094BDC /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				2ECCBD4329E3482700094BDC /* RunLogTableView.swift */,
+				2ECCBD4529E3485100094BDC /* EditRunView.swift */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		2ECCBD3B29DF4C1B00094BDC /* View Models */ = {
+			isa = PBXGroup;
+			children = (
+				2ECCBD4129E345A900094BDC /* RunLogViewModel.swift */,
+			);
+			path = "View Models";
+			sourceTree = "<group>";
+		};
+		2ECCBD3C29DF4C2800094BDC /* Data Models */ = {
+			isa = PBXGroup;
+			children = (
+				2ECCBD3F29DF4C7100094BDC /* Run.swift */,
+				2ECCBD3D29DF4C3F00094BDC /* FileParser.swift */,
+				2ECCBD4929E46FA500094BDC /* RunLog.swift */,
+			);
+			path = "Data Models";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -127,6 +172,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2ECCBD4829E34B3400094BDC /* RunLog.csv in Resources */,
 				2ECCBD3329DF492400094BDC /* Preview Assets.xcassets in Resources */,
 				2ECCBD3029DF492400094BDC /* Assets.xcassets in Resources */,
 			);
@@ -140,7 +186,13 @@
 			buildActionMask = 2147483647;
 			files = (
 				2ECCBD2E29DF492200094BDC /* ContentView.swift in Sources */,
+				2ECCBD4029DF4C7100094BDC /* Run.swift in Sources */,
+				2ECCBD3E29DF4C3F00094BDC /* FileParser.swift in Sources */,
+				2ECCBD4229E345A900094BDC /* RunLogViewModel.swift in Sources */,
 				2ECCBD2C29DF492200094BDC /* RunLogApp.swift in Sources */,
+				2ECCBD4629E3485200094BDC /* EditRunView.swift in Sources */,
+				2ECCBD4A29E46FA500094BDC /* RunLog.swift in Sources */,
+				2ECCBD4429E3482700094BDC /* RunLogTableView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
