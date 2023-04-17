@@ -9,4 +9,8 @@ import Foundation
 
 class RunLog: ObservableObject {
     var runs: [Run.ID: Run] = [:]
+    
+    func deleteRun(runID: Run.ID) {
+        runs.removeValue(forKey: runID)
+    }
 }

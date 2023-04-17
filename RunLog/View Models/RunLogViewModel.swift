@@ -50,4 +50,9 @@ class RunLogViewModel: ObservableObject {
     func updateState() {
         runs = Array(runLog.runs.values).sorted(using: sortOrder)
     }
+    
+    func deleteRun(run: Run) {
+        runLog.deleteRun(runID: run.id)
+        updateState()
+    }
 }

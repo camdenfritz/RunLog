@@ -8,18 +8,26 @@
 import Foundation
 
 
-class Run: Identifiable {
+class Run: Identifiable, Hashable {
     var date: Date
-    var distance: Double
-    var duration: Double // seconds
+    var distance: Double {
+        didSet {
+            setPace()
+        }
+    }
+    var duration: Double {
+        didSet {
+            setPace()
+        }
+    }// seconds
     var calories: Int?
-    var notes: String?
+    var notes: String
     var pace: Double // seconds a mile
     var isMetric = false
     var id: Run.ID
     
     
-    init(date: Date, distance: Double, duration: Double, calories: Int? = nil, notes: String? = nil, uuidString : String?) {
+    init(date: Date, distance: Double, duration: Double, calories: Int? = nil, notes: String = "", uuidString : String?) {
         self.date = date
         self.distance = distance
         self.duration = duration
@@ -27,6 +35,10 @@ class Run: Identifiable {
         self.calories = calories
         self.notes = notes
         self.id = Run.ID(uuidString: uuidString)
+    }
+    
+    func hash(into hasher: inout Hasher) {
+        hasher.combine(id)
     }
     
     struct ID: Identifiable, Hashable {
@@ -38,6 +50,14 @@ class Run: Identifiable {
             } else {
                 self.id = UUID()
             }
+        }
+    }
+    
+    func setPace() {
+        if distance == 0.0 || duration == 0.0 {
+            pace = 0
+        } else {
+            self.pace = self.duration / self.distance
         }
     }
 }

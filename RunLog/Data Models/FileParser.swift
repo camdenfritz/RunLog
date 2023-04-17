@@ -95,7 +95,7 @@ struct FileParser {
             let duration = hours * 3600 + minutes * 60 + seconds
             
             let calories = Int(runData[3])
-            let notes = runData[4].isEmpty ? nil : String(runData[4])
+            let notes = runData[4].isEmpty ? "" : String(runData[4])
             let uuidString = runData[5].isEmpty ? nil : String(runData[5])
             
             let run = Run(date: date, distance: distance, duration: duration, calories: calories, notes: notes, uuidString: uuidString)

@@ -9,10 +9,11 @@ import SwiftUI
 
 @main
 struct RunLogApp: App {
-    @State var runLogViewModel = RunLogViewModel()
+    @StateObject var runLogViewModel = RunLogViewModel()
     var body: some Scene {
         WindowGroup {
             ContentView()
+                .environmentObject(runLogViewModel)
         }
     }
 }

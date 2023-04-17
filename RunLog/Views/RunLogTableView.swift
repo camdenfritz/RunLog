@@ -40,8 +40,6 @@ struct RunLogTableView: View {
                 .background(rowBackground(for: run))
             }
         }
-        
-        
     }
     
     private func rowBackground(for run: Run) -> some View {
