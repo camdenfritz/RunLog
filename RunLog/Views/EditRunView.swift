@@ -12,10 +12,7 @@ struct EditRunView: View {
     @EnvironmentObject var runLogViewModel: RunLogViewModel
     
     @State private var selectedDate = Date()
-    @State private var distance = 0
     @State private var duration = ""
-    @State private var calories = 0
-    @State private var notes = ""
     
     @State private var isDistanceValid = true
     @State private var isDurationValid = true
@@ -23,8 +20,7 @@ struct EditRunView: View {
     var body: some View {
         VStack {
             Form {
-                // TODO: Make fields red if required or wrong format
-                DatePicker("Date", selection: $selectedDate, displayedComponents: .date)
+                DatePicker("Date", selection: $run.date, displayedComponents: .date)
                     .onAppear {
                         self.selectedDate = run.date
                     }
@@ -55,7 +51,6 @@ struct EditRunView: View {
             .toolbar {
                 ToolbarItem(placement: .primaryAction) {
                     Button("Save", action: {
-                        saveRun()
                         if !runLogViewModel.runs.contains(run) {
                             runLogViewModel.runs.append(run)
                         }
@@ -69,15 +64,6 @@ struct EditRunView: View {
         
     }
     
-    private func saveRun() {
-        // Convert the duration from HH:mm:ss format to seconds
-        // TODO: Put safe guards in place here
-        let timeComponents = duration.split(separator: ":").map { Double($0) ?? 0 }
-        let durationInSeconds = timeComponents[0] * 3600 + timeComponents[1] * 60 + timeComponents[2]
-        run.date = selectedDate
-        run.duration = durationInSeconds
-    }
-    
     private func validateDuration(_ duration: String) -> Bool {
         let components = duration.split(separator: ":")
         if components.count == 3 {
@@ -88,7 +74,6 @@ struct EditRunView: View {
                 return true
             }
         }
-        
         return false
     }
 }

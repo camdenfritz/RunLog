@@ -62,9 +62,8 @@ struct ContentView: View {
                                     runLogViewModel.selectedRun = nil
                                 })
                             }
-    
                     }
-                }else {
+                } else {
                     Text("Select a run to edit")
                         .font(.title)
                         .foregroundColor(.gray)
