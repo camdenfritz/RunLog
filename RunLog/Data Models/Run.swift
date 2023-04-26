@@ -8,7 +8,7 @@
 import Foundation
 
 
-class Run: Identifiable, Hashable {
+class Run: Identifiable, Hashable, ObservableObject {
     var date: Date
     var distance: Double {
         didSet {
@@ -20,21 +20,25 @@ class Run: Identifiable, Hashable {
             setPace()
         }
     }// seconds
+
     var calories: Int?
     var notes: String
     var pace: Double // seconds a mile
     var isMetric = false
     var id: Run.ID
     
-    
     init(date: Date, distance: Double, duration: Double, calories: Int? = nil, notes: String = "", uuidString : String?) {
         self.date = date
         self.distance = distance
         self.duration = duration
-        self.pace = self.duration / self.distance
         self.calories = calories
         self.notes = notes
         self.id = Run.ID(uuidString: uuidString)
+        if distance == 0.0 || duration == 0.0 {
+            self.pace = 0
+        } else {
+            self.pace = self.duration / self.distance
+        }
     }
     
     func hash(into hasher: inout Hasher) {
@@ -45,8 +49,13 @@ class Run: Identifiable, Hashable {
         let id: UUID
         
         init(uuidString: String? = nil) {
-            if let tempID = UUID(uuidString: uuidString ?? "") {
-                self.id = tempID
+            guard let tempString = uuidString else {
+                self.id = UUID()
+                return
+            }
+            let tempId = UUID(uuidString: tempString)
+            if let id = tempId {
+                self.id = id
             } else {
                 self.id = UUID()
             }

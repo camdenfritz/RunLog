@@ -3,50 +3,25 @@ import SwiftUI
 struct RunLogTableView: View {
     @EnvironmentObject var runLogViewModel: RunLogViewModel
     @Binding var sortOrder: [KeyPathComparator<Run>]
+
     
     var body: some View {
         
-        Table(runLogViewModel.runs, sortOrder: $sortOrder) {
+        Table(runLogViewModel.runs,
+              selection: $runLogViewModel.selectedRun,
+              sortOrder: $sortOrder) {
             TableColumn("Date", value: \.date) { run in
-                dateText(for: run).onTapGesture {
-                    if runLogViewModel.selectedRun == nil {
-                        runLogViewModel.selectedRun = run
-                    }
-                }
-                .background(rowBackground(for: run))
+                dateText(for: run)
             }
             TableColumn("Distance", value: \.distance) { run in
-                distanceText(for: run).onTapGesture {
-                    if runLogViewModel.selectedRun == nil {
-                        runLogViewModel.selectedRun = run
-                    }
-                }
-                .background(rowBackground(for: run))
+                distanceText(for: run)
             }
             TableColumn("Duration", value: \.duration) { run in
-                durationText(for: run).onTapGesture {
-                    if runLogViewModel.selectedRun == nil {
-                        runLogViewModel.selectedRun = run
-                    }
-                }
-                .background(rowBackground(for: run))
+                durationText(for: run)
             }
             TableColumn("Pace", value: \.pace) { run in
-                paceText(for: run).onTapGesture {
-                    if runLogViewModel.selectedRun == nil {
-                        runLogViewModel.selectedRun = run
-                    }
-                }
-                .background(rowBackground(for: run))
+                paceText(for: run)
             }
-        }
-    }
-    
-    private func rowBackground(for run: Run) -> some View {
-        if run == runLogViewModel.selectedRun {
-            return Color.yellow
-        } else {
-            return Color.clear
         }
     }
     

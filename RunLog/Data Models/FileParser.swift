@@ -60,15 +60,13 @@ struct FileParser {
             var tempData = [String]()
             for nextString in rowData {
                 
-                let allowedCharacters = CharacterSet(charactersIn: "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789,./: ")
+                let allowedCharacters = CharacterSet(charactersIn: "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789,./:- ")
                 let filteredText = String(nextString.unicodeScalars.filter(allowedCharacters.contains))
                 
                 tempData.append(filteredText)
-                
             }
             localData.append(tempData)
         }
-        
         return localData
     }
     
@@ -114,6 +112,34 @@ struct FileParser {
         guard let contentString = String(data: contentData, encoding: .ascii) else {throw FileParserError.stringIsEmpty}
         
         return contentString
+    }
+    
+    func exportToCSV(runs: [Run], url: URL) throws {
+        let header = "Date,Distance,Duration,Calories,Notes,UUID\n"
+        var csvString = header
+        
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "MM/dd/yyyy"
+        
+        for run in runs {
+            if let cals = run.calories {
+                csvString += "\(dateFormatter.string(from: run.date)),\(run.distance),\(secondsToTimeString(seconds: run.duration)),\(cals),\(run.notes),\(run.id.id.uuidString)\n"
+            } else {
+                csvString += "\(dateFormatter.string(from: run.date)),\(run.distance),\(secondsToTimeString(seconds: run.duration)),,\(run.notes),\(run.id.id.uuidString)\n"
+            }
+        }
+        try csvString.write(to: url, atomically: true, encoding: .utf8)
+    }
+    
+    func secondsToTimeString(seconds: Double) -> String {
+        let (h, m, s) = secondsToHoursMinutesSeconds(seconds: seconds)
+        return String(format: "%02d:%02d:%02d", h, m, s)
+    }
+    
+    func secondsToHoursMinutesSeconds(seconds: Double) -> (Int, Int, Int) {
+        let (hr, minSec) = modf(seconds / 3600)
+        let (min, sec) = modf(60 * minSec)
+        return (Int(hr), Int(min), Int(60 * sec))
     }
     
 }

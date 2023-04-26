@@ -10,22 +10,21 @@ import SwiftUI
 struct ContentView: View {
     @EnvironmentObject var runLogViewModel: RunLogViewModel
     @State var newRun = Run(date: Date(), distance: 0, duration: 0, uuidString: nil)
+    @State private var selectedEventID: Run.ID?
 
     var body: some View {
         VStack {
             NavigationView {
-                RunLogTableView(sortOrder: $runLogViewModel.sortOrder)
+                RunLogTableView(
+                    sortOrder: $runLogViewModel.sortOrder)
                     .environmentObject(runLogViewModel)
                     .toolbar {
                         ToolbarItem(placement: .primaryAction) {
                             Button("New", action: {
-                                if runLogViewModel.selectedRun == nil {
-                                    
-                                    newRun = Run(date: Date(), distance: 0, duration: 0, uuidString: nil)
-                                    runLogViewModel.selectedRun = newRun
-                                }
+                                newRun = Run(date: Date(), distance: 0, duration: 0, uuidString: nil)
+                                runLogViewModel.addRun(newRun: newRun)
+                                runLogViewModel.selectedRun = newRun.id
                             })
-                            .disabled(runLogViewModel.selectedRun != nil)
                         }
                         ToolbarItem(placement: .primaryAction) {
                             Button("Delete", action: {
@@ -38,30 +37,18 @@ struct ContentView: View {
                         }
                     }
                 
-                if let selectedRun = runLogViewModel.selectedRun,
-                   let runIndex = runLogViewModel.runs.firstIndex(where: { $0.id == selectedRun.id }) {
+                if let selectedRunId = runLogViewModel.selectedRun,
+                   let runIndex = runLogViewModel.runs.firstIndex(where: { $0.id == selectedRunId }) {
                     EditRunView(run: $runLogViewModel.runs[runIndex])
                         .environmentObject(runLogViewModel)
                         .padding()
                         .navigationTitle("Edit Run")
                         .toolbar {
                             ToolbarItem(placement: .primaryAction) {
-                                Button("Cancel", action: {
+                                Button("Done", action: {
                                     runLogViewModel.selectedRun = nil
-                                })
-                            }
+                            })
                         }
-                } else if runLogViewModel.selectedRun != nil {
-                    EditRunView(run: $newRun)
-                        .environmentObject(runLogViewModel)
-                        .padding()
-                        .navigationTitle("New Run")
-                        .toolbar {
-                            ToolbarItem(placement: .primaryAction) {
-                                Button("Cancel", action: {
-                                    runLogViewModel.selectedRun = nil
-                                })
-                            }
                     }
                 } else {
                     Text("Select a run to edit")
@@ -70,6 +57,7 @@ struct ContentView: View {
                         .frame(width: 350)
                 }
             }
+            WeekTotalView(weeklyMileage: $runLogViewModel.thisWeekMileage)
         }
     }
 }
