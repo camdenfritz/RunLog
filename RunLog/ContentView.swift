@@ -14,9 +14,8 @@ struct ContentView: View {
 
     var body: some View {
         VStack {
-            NavigationView {
-                RunLogTableView(
-                    sortOrder: $runLogViewModel.sortOrder)
+            HSplitView {
+                DropFileTableView(url: $runLogViewModel.url, sortOrder: $runLogViewModel.sortOrder)
                     .environmentObject(runLogViewModel)
                     .toolbar {
                         ToolbarItem(placement: .primaryAction) {
@@ -36,6 +35,7 @@ struct ContentView: View {
                             .disabled(runLogViewModel.selectedRun == nil)
                         }
                     }
+                    .frame(minHeight: 300)
                 
                 if let selectedRunId = runLogViewModel.selectedRun,
                    let runIndex = runLogViewModel.runs.firstIndex(where: { $0.id == selectedRunId }) {
@@ -43,6 +43,7 @@ struct ContentView: View {
                         .environmentObject(runLogViewModel)
                         .padding()
                         .navigationTitle("Edit Run")
+                        .frame(minWidth: 300, minHeight: 300)
                         .toolbar {
                             ToolbarItem(placement: .primaryAction) {
                                 Button("Done", action: {
@@ -54,10 +55,17 @@ struct ContentView: View {
                     Text("Select a run to edit")
                         .font(.title)
                         .foregroundColor(.gray)
-                        .frame(width: 350)
+                        .frame(minWidth: 300, minHeight: 300)
+                        .padding()
                 }
             }
-            WeekTotalView(weeklyMileage: $runLogViewModel.thisWeekMileage)
+            Divider()
+            HSplitView {
+                WeekTotalView(weekMileage: $runLogViewModel.thisWeekMileage)
+                    .frame(minHeight: 300)
+                WeeklyTotalsView(weeklyMileage: $runLogViewModel.pastTenWeekMileage, weeklyDuration: $runLogViewModel.pastTenWeekDuration)
+                    .frame(minHeight: 300)
+            }
         }
     }
 }

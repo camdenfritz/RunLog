@@ -10,6 +10,9 @@
 		2E56924329F729BA00636C70 /* DurationFormatter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E56924229F729BA00636C70 /* DurationFormatter.swift */; };
 		2E56924529F8535700636C70 /* WeekTotalView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E56924429F8535700636C70 /* WeekTotalView.swift */; };
 		2E56924F29F9B42C00636C70 /* Day.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E56924E29F9B42C00636C70 /* Day.swift */; };
+		2E56925329F9C01600636C70 /* WeeklyTotalsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E56925229F9C01600636C70 /* WeeklyTotalsView.swift */; };
+		2E6C3BD329FC5FD900A4D36F /* WeeklyStats.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E6C3BD229FC5FD900A4D36F /* WeeklyStats.swift */; };
+		2E6C3BD729FEF06E00A4D36F /* DropFileTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E6C3BD629FEF06E00A4D36F /* DropFileTableView.swift */; };
 		2ECCBD2C29DF492200094BDC /* RunLogApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2ECCBD2B29DF492200094BDC /* RunLogApp.swift */; };
 		2ECCBD2E29DF492200094BDC /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2ECCBD2D29DF492200094BDC /* ContentView.swift */; };
 		2ECCBD3029DF492400094BDC /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2ECCBD2F29DF492400094BDC /* Assets.xcassets */; };
@@ -27,6 +30,9 @@
 		2E56924229F729BA00636C70 /* DurationFormatter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DurationFormatter.swift; sourceTree = "<group>"; };
 		2E56924429F8535700636C70 /* WeekTotalView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeekTotalView.swift; sourceTree = "<group>"; };
 		2E56924E29F9B42C00636C70 /* Day.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Day.swift; sourceTree = "<group>"; };
+		2E56925229F9C01600636C70 /* WeeklyTotalsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeeklyTotalsView.swift; sourceTree = "<group>"; };
+		2E6C3BD229FC5FD900A4D36F /* WeeklyStats.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeeklyStats.swift; sourceTree = "<group>"; };
+		2E6C3BD629FEF06E00A4D36F /* DropFileTableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DropFileTableView.swift; sourceTree = "<group>"; };
 		2ECCBD2829DF492200094BDC /* RunLog.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = RunLog.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		2ECCBD2B29DF492200094BDC /* RunLogApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RunLogApp.swift; sourceTree = "<group>"; };
 		2ECCBD2D29DF492200094BDC /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -108,6 +114,9 @@
 				2ECCBD4329E3482700094BDC /* RunLogTableView.swift */,
 				2ECCBD4529E3485100094BDC /* EditRunView.swift */,
 				2E56924429F8535700636C70 /* WeekTotalView.swift */,
+				2E56925229F9C01600636C70 /* WeeklyTotalsView.swift */,
+				2E6C3BD229FC5FD900A4D36F /* WeeklyStats.swift */,
+				2E6C3BD629FEF06E00A4D36F /* DropFileTableView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -202,14 +211,17 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2E6C3BD329FC5FD900A4D36F /* WeeklyStats.swift in Sources */,
 				2ECCBD2E29DF492200094BDC /* ContentView.swift in Sources */,
 				2ECCBD4029DF4C7100094BDC /* Run.swift in Sources */,
 				2ECCBD3E29DF4C3F00094BDC /* FileParser.swift in Sources */,
 				2E56924329F729BA00636C70 /* DurationFormatter.swift in Sources */,
 				2E56924F29F9B42C00636C70 /* Day.swift in Sources */,
 				2ECCBD4229E345A900094BDC /* RunLogViewModel.swift in Sources */,
+				2E6C3BD729FEF06E00A4D36F /* DropFileTableView.swift in Sources */,
 				2ECCBD2C29DF492200094BDC /* RunLogApp.swift in Sources */,
 				2ECCBD4629E3485200094BDC /* EditRunView.swift in Sources */,
+				2E56925329F9C01600636C70 /* WeeklyTotalsView.swift in Sources */,
 				2E56924529F8535700636C70 /* WeekTotalView.swift in Sources */,
 				2ECCBD4A29E46FA500094BDC /* RunLog.swift in Sources */,
 				2ECCBD4429E3482700094BDC /* RunLogTableView.swift in Sources */,

@@ -14,7 +14,7 @@ class RunLogViewModel: ObservableObject {
         }
     }
     
-    var runLog  = RunLog()
+    @Published var runLog  = RunLog()
     
     @Published var runs: [Run] = []
     
@@ -25,16 +25,32 @@ class RunLogViewModel: ObservableObject {
     }
     
     @Published var thisWeekMileage: [Double] = [Double](repeating: 0.0, count: 7)
+    
+    @Published var pastTenWeekMileage: [Double] = [Double](repeating: 0.0, count: 10)
+
+    @Published var pastTenWeekDuration: [Double] = [Double](repeating: 0.0, count: 10)
 
     
-    @Published var selectedRun: Run.ID?
+    @Published var selectedRun: Run.ID? {
+        didSet {
+
+            updateState()
+        }
+    }
     
     init() {
-        guard let exampleRunLog = Bundle.main.url(forResource: "RunLog", withExtension: "csv") else {
-            exit(-1)
-        }
         
-        url = exampleRunLog
+        if let savedRunLog = UserDefaults.standard.data(forKey: "runLog") {
+            let decoder = JSONDecoder()
+            if let loadedRunLog = try? decoder.decode(RunLog.self, from: savedRunLog) {
+                self.runLog = loadedRunLog
+            }
+        } else {
+            guard let exampleRunLog = Bundle.main.url(forResource: "RunLog", withExtension: "csv") else {
+                exit(-1)
+            }
+            url = exampleRunLog
+        }
         updateState()
     }
     
@@ -62,6 +78,8 @@ class RunLogViewModel: ObservableObject {
     func updateState() {
         runs = Array(runLog.runs.values).sorted(using: sortOrder)
         calculateThisWeekMileage()
+        sumMileageOfPastNWeeks(10)
+        saveRunLog()
     }
     
     func deleteRun(run: Run.ID) {
@@ -103,6 +121,33 @@ class RunLogViewModel: ObservableObject {
         let components2 = Calendar.current.dateComponents([.year, .month, .day], from: date2)
         
         return components1.year == components2.year && components1.month == components2.month && components1.day == components2.day
+    }
+    
+    func sumMileageOfPastNWeeks(_ numberWeeks: Int) {
+        pastTenWeekMileage = Array(repeating: 0, count: numberWeeks)
+        pastTenWeekDuration = Array(repeating: 0, count: numberWeeks)
+        let calendar = Calendar.current
+        let today = Date()
+        
+        for run in runs {
+            let components = calendar.dateComponents([.weekOfYear, .year], from: run.date, to: today)
+            guard let weeksAgo = components.weekOfYear, let yearsAgo = components.year else { continue }
+            
+            if yearsAgo == 0 && weeksAgo >= 0 && weeksAgo < numberWeeks {
+                pastTenWeekMileage[weeksAgo] += run.distance
+                pastTenWeekDuration[weeksAgo] += run.duration
+            }
+        }
+        
+        pastTenWeekMileage.reverse()
+        pastTenWeekDuration.reverse()
+    }
+    
+    private func saveRunLog() {
+        let encoder = JSONEncoder()
+        if let encoded = try? encoder.encode(runLog) {
+            UserDefaults.standard.set(encoded, forKey: "runLog")
+        }
     }
 
 }
