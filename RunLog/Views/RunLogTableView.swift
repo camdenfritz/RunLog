@@ -3,12 +3,14 @@ import SwiftUI
 struct RunLogTableView: View {
     @EnvironmentObject var runLogViewModel: RunLogViewModel
     @Binding var sortOrder: [KeyPathComparator<Run>]
+    
+    @Binding var multipleSelection: Set<Run.ID>
 
     
     var body: some View {
         
         Table(runLogViewModel.runs,
-              selection: $runLogViewModel.selectedRun,
+              selection: $multipleSelection,
               sortOrder: $sortOrder) {
             TableColumn("Date", value: \.date) { run in
                 dateText(for: run)
@@ -23,6 +25,21 @@ struct RunLogTableView: View {
                 paceText(for: run)
             }
         }
+          .onChange(of: multipleSelection) { newVal in
+              runLogViewModel.selectedRun = multipleSelection.first
+          }
+          .toolbar {
+              ToolbarItem(placement: .primaryAction) {
+                  Button("Delete", action: {
+                      for run in multipleSelection {
+                          runLogViewModel.deleteRun(run: run)
+                      }
+                      runLogViewModel.selectedRun = nil
+                      multipleSelection = Set<Run.ID>()
+                  })
+                  .disabled(multipleSelection.count == 0)
+              }
+          }
     }
     
     private func dateText(for run: Run) -> some View {

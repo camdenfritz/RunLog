@@ -14,14 +14,17 @@ struct DropFileTableView: View {
     @EnvironmentObject var runLogViewModel: RunLogViewModel
     @Binding var sortOrder: [KeyPathComparator<Run>]
     
+    @Binding var multipleSelection: Set<Run.ID>
+    
     private var strokeBorderColor: Color {
         return isHoveredOver ? .blue : .gray
     }
     var body: some View {
         let dropDelegate = CSVURLDropDelegate(url: $url, isHoveredOver: $isHoveredOver)
         ZStack {
+            
             RunLogTableView(
-                sortOrder: $runLogViewModel.sortOrder)
+                sortOrder: $runLogViewModel.sortOrder, multipleSelection: $multipleSelection)
                 .environmentObject(runLogViewModel)
                 
             Rectangle()

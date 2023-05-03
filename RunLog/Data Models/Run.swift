@@ -19,7 +19,7 @@ class Run: Identifiable, Hashable, ObservableObject, Codable {
         didSet {
             setPace()
         }
-    }// seconds
+    }
 
     var calories: Int?
     var notes: String

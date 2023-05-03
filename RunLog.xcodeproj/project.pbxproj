@@ -36,7 +36,7 @@
 		2ECCBD2829DF492200094BDC /* RunLog.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = RunLog.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		2ECCBD2B29DF492200094BDC /* RunLogApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RunLogApp.swift; sourceTree = "<group>"; };
 		2ECCBD2D29DF492200094BDC /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
-		2ECCBD2F29DF492400094BDC /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		2ECCBD2F29DF492400094BDC /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = Assets.xcassets; path = RunLog/Assets.xcassets; sourceTree = SOURCE_ROOT; };
 		2ECCBD3229DF492400094BDC /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		2ECCBD3429DF492400094BDC /* RunLog.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = RunLog.entitlements; sourceTree = "<group>"; };
 		2ECCBD3D29DF4C3F00094BDC /* FileParser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileParser.swift; sourceTree = "<group>"; };
