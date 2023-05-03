@@ -29,15 +29,11 @@ struct WeeklyTotalsView: View {
                 WeeklyStats(weeklyMileage: $weeklyMileage, weeklyDuration: $weeklyDuration, selectedWeekIndex: $selectedIndex)
                 Chart {
                     ForEach(Array(zip(weeklyMileage.indices, weeklyMileage)), id: \.0) { index, week in
-                        let daysAgo = (weeklyMileage.count - index) * -7
-                        if let dayOfWeek = Calendar.current.date(byAdding: .day, value: daysAgo, to: Date()) {
-                            let weekStr = WeeklyTotalsView.dateFormatter.string(from: dayOfWeek)
                             LineMark(
-                                x: .value("Week", "\(weekStr.dropLast(5))"),
+                                x: .value("Week", "\(makeStrDate(index: index))"),
                                 y: .value("Mileage", week)
                             )
                         }
-                    }
                     if let selectedWeek {
                         PointMark(x: .value("Week", selectedWeek),
                                   y: .value("Mileage", weeklyMileage[selectedIndex]))
@@ -52,15 +48,10 @@ struct WeeklyTotalsView: View {
                                 selectedWeek = chartProxy.value(
                                     atX: hoverLocation.x, as: String.self
                                 )
-                                if var tempSelectedWeek = selectedWeek {
-                                    tempSelectedWeek += "-"
-                                    tempSelectedWeek += String(Calendar.current.component(.year, from: Date()))
-                                    if let selectedDay = WeeklyTotalsView.dateFormatter.date(from: tempSelectedWeek) {
-                                        let components = Calendar.current.dateComponents([.day], from: selectedDay, to: Date())
-                                        let tempIndex = weeklyMileage.count - Int((components.day ?? 0)/7)
-                                        if tempIndex > 0 && tempIndex < weeklyMileage.count {
-                                            selectedIndex = tempIndex
-                                        }                                        
+                                for (index, weekStr) in weeklyMileage.indices.map({ i in makeStrDate(index: i) }).enumerated() {
+                                    if weekStr == selectedWeek {
+                                        selectedIndex = index
+                                        break
                                     }
                                 }
                             case .ended:
@@ -73,4 +64,20 @@ struct WeeklyTotalsView: View {
             }
         }
     }
+    func makeStrDate(index: Int) -> String {
+        var calendar = Calendar.current
+        calendar.firstWeekday = 1 // 1 means Sunday
+        let today = Date()
+        guard let startOfWeek = calendar.date(from: calendar.dateComponents([.yearForWeekOfYear, .weekOfYear], from: today)) else { return "" }
+        let weekStartIndexAgo = calendar.date(byAdding: .weekOfYear, value: -(weeklyMileage.count-index-1), to: startOfWeek)
+
+        guard let weekStart = weekStartIndexAgo else {
+            return ""
+        }
+        
+        let weekStr = WeeklyTotalsView.dateFormatter.string(from: weekStart)
+        let trimmedWeekStr = String(weekStr.dropLast(5))
+        return trimmedWeekStr
+    }
 }
+

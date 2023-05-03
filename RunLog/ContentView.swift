@@ -57,10 +57,13 @@ struct ContentView: View {
             Divider()
             HSplitView {
                 WeekTotalView(weekMileage: $runLogViewModel.thisWeekMileage)
-                    .frame(minHeight: 300)
+                    .frame(minHeight: 250)
                 WeeklyTotalsView(weeklyMileage: $runLogViewModel.pastTenWeekMileage, weeklyDuration: $runLogViewModel.pastTenWeekDuration)
-                    .frame(minHeight: 300)
+                    .frame(minHeight: 250)
             }
+            Divider()
+            StatsView()
+                .environmentObject(runLogViewModel)
         }
     }
 }

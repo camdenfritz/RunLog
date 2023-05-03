@@ -93,9 +93,3 @@ struct CSVURLDropDelegate: DropDelegate {
     }
     
  }
-
-//struct DropFilesView_Previews: PreviewProvider {
-//    static var previews: some View {
-//        DropFilesView()
-//    }
-//}

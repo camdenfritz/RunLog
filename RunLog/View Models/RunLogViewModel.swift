@@ -126,14 +126,18 @@ class RunLogViewModel: ObservableObject {
     func sumMileageOfPastNWeeks(_ numberWeeks: Int) {
         pastTenWeekMileage = Array(repeating: 0, count: numberWeeks)
         pastTenWeekDuration = Array(repeating: 0, count: numberWeeks)
-        let calendar = Calendar.current
+        var calendar = Calendar.current
+        calendar.firstWeekday = 1 // 1 means Sunday
+
         let today = Date()
-        
+        let startOfWeek = calendar.date(from: calendar.dateComponents([.yearForWeekOfYear, .weekOfYear], from: today))
+
         for run in runs {
-            let components = calendar.dateComponents([.weekOfYear, .year], from: run.date, to: today)
-            guard let weeksAgo = components.weekOfYear, let yearsAgo = components.year else { continue }
+            let runWeek = calendar.date(from: calendar.dateComponents([.yearForWeekOfYear, .weekOfYear], from: run.date))
+            let weekDifference = calendar.dateComponents([.weekOfYear], from: runWeek!, to: startOfWeek!).weekOfYear
+            guard let weeksAgo = weekDifference else { continue }
             
-            if yearsAgo == 0 && weeksAgo >= 0 && weeksAgo < numberWeeks {
+            if weeksAgo >= 0 && weeksAgo < numberWeeks {
                 pastTenWeekMileage[weeksAgo] += run.distance
                 pastTenWeekDuration[weeksAgo] += run.duration
             }
@@ -150,4 +154,38 @@ class RunLogViewModel: ObservableObject {
         }
     }
 
+}
+
+
+/// Stats extension
+extension RunLogViewModel {
+    struct Stats {
+        let totalMiles: Double
+        let dailyAverage: Double
+        let averagePace: Double
+    }
+    
+    func calculateStats(past pastDays: Int) -> Stats {
+        let today = Date()
+        let startDay = Calendar.current.date(byAdding: .day, value: -pastDays, to: today)!
+        
+        var totalMiles = 0.0
+        var totalDuration = 0.0
+        var numberOfRuns = 0.0
+        var totalPace = 0.0
+        
+        for run in runs {
+            if run.date >= startDay && run.date <= today {
+                totalMiles += run.distance
+                totalDuration += run.duration
+                totalPace += run.pace
+                numberOfRuns += 1
+            }
+        }
+        
+        let dailyAverage = totalMiles / Double(pastDays)
+        let averagePace = numberOfRuns > 0 ? totalPace / numberOfRuns : 0
+        
+        return Stats(totalMiles: totalMiles, dailyAverage: dailyAverage, averagePace: averagePace)
+    }
 }

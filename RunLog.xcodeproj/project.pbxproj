@@ -13,6 +13,7 @@
 		2E56925329F9C01600636C70 /* WeeklyTotalsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E56925229F9C01600636C70 /* WeeklyTotalsView.swift */; };
 		2E6C3BD329FC5FD900A4D36F /* WeeklyStats.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E6C3BD229FC5FD900A4D36F /* WeeklyStats.swift */; };
 		2E6C3BD729FEF06E00A4D36F /* DropFileTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E6C3BD629FEF06E00A4D36F /* DropFileTableView.swift */; };
+		2EA302BC2A02CDBF0035EB57 /* StatsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EA302BB2A02CDBF0035EB57 /* StatsView.swift */; };
 		2ECCBD2C29DF492200094BDC /* RunLogApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2ECCBD2B29DF492200094BDC /* RunLogApp.swift */; };
 		2ECCBD2E29DF492200094BDC /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2ECCBD2D29DF492200094BDC /* ContentView.swift */; };
 		2ECCBD3029DF492400094BDC /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2ECCBD2F29DF492400094BDC /* Assets.xcassets */; };
@@ -33,6 +34,7 @@
 		2E56925229F9C01600636C70 /* WeeklyTotalsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeeklyTotalsView.swift; sourceTree = "<group>"; };
 		2E6C3BD229FC5FD900A4D36F /* WeeklyStats.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeeklyStats.swift; sourceTree = "<group>"; };
 		2E6C3BD629FEF06E00A4D36F /* DropFileTableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DropFileTableView.swift; sourceTree = "<group>"; };
+		2EA302BB2A02CDBF0035EB57 /* StatsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatsView.swift; sourceTree = "<group>"; };
 		2ECCBD2829DF492200094BDC /* RunLog.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = RunLog.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		2ECCBD2B29DF492200094BDC /* RunLogApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RunLogApp.swift; sourceTree = "<group>"; };
 		2ECCBD2D29DF492200094BDC /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -117,6 +119,7 @@
 				2E56925229F9C01600636C70 /* WeeklyTotalsView.swift */,
 				2E6C3BD229FC5FD900A4D36F /* WeeklyStats.swift */,
 				2E6C3BD629FEF06E00A4D36F /* DropFileTableView.swift */,
+				2EA302BB2A02CDBF0035EB57 /* StatsView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -222,6 +225,7 @@
 				2ECCBD2C29DF492200094BDC /* RunLogApp.swift in Sources */,
 				2ECCBD4629E3485200094BDC /* EditRunView.swift in Sources */,
 				2E56925329F9C01600636C70 /* WeeklyTotalsView.swift in Sources */,
+				2EA302BC2A02CDBF0035EB57 /* StatsView.swift in Sources */,
 				2E56924529F8535700636C70 /* WeekTotalView.swift in Sources */,
 				2ECCBD4A29E46FA500094BDC /* RunLog.swift in Sources */,
 				2ECCBD4429E3482700094BDC /* RunLogTableView.swift in Sources */,
